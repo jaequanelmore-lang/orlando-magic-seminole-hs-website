@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orlando Magic & Seminole High School</title>
+    <meta name="description" content="Official website for Orlando Magic NBA team and Seminole High School athletic programs. Follow games, events, news, and community updates.">
+    <meta name="keywords" content="Orlando Magic, Seminole High School, Basketball, Sports, Athletics">
+    <meta name="author" content="Orlando Magic & Seminole High School">
+    <title>Orlando Magic & Seminole High School - Official Website</title>
+    <link rel="canonical" href="https://jaequanelmore-lang.github.io/orlando-magic-seminole-hs-website/">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Orlando Magic & Seminole High School">
+    <meta property="og:description" content="Official website celebrating the Orlando Magic and Seminole High School athletic excellence.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1546519227-7a46d19cd819?w=1200&q=80">
+    <meta property="og:type" content="website">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         @keyframes slideInLeft {
             from {
@@ -28,12 +41,42 @@
             }
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce-slow {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         .animate-slide-left {
             animation: slideInLeft 0.8s ease;
         }
 
         .animate-slide-right {
             animation: slideInRight 0.8s ease;
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 1s ease;
+        }
+
+        .animate-bounce-slow {
+            animation: bounce-slow 3s ease-in-out infinite;
+        }
+
+        .nav-link {
+            position: relative;
         }
 
         .nav-link::after {
@@ -51,6 +94,10 @@
             width: 100%;
         }
 
+        .section-title {
+            position: relative;
+        }
+
         .section-title::after {
             content: '';
             position: absolute;
@@ -66,70 +113,154 @@
         html {
             scroll-behavior: smooth;
         }
+
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+        }
+
+        .mobile-menu-enter {
+            animation: slideInLeft 0.3s ease;
+        }
+
+        .scroll-to-top {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 via-slate-50 to-blue-100">
 
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-gradient-to-r from-slate-900 via-blue-900 to-blue-700 shadow-lg backdrop-blur-lg">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
             <div class="flex justify-between items-center">
-                <div class="text-2xl font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent tracking-wider">
-                    MAGIC & SEMINOLES
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-basketball text-amber-400 text-2xl"></i>
+                    <div class="text-xl sm:text-2xl font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent tracking-wider">
+                        MAGIC & SEMINOLES
+                    </div>
                 </div>
-                <ul class="flex gap-8 list-none">
-                    <li><a href="#home" class="nav-link relative text-white font-semibold hover:text-amber-400 transition-colors">Home</a></li>
-                    <li><a href="#magic" class="nav-link relative text-white font-semibold hover:text-amber-400 transition-colors">Orlando Magic</a></li>
-                    <li><a href="#seminoles" class="nav-link relative text-white font-semibold hover:text-amber-400 transition-colors">Seminoles</a></li>
-                    <li><a href="#gallery" class="nav-link relative text-white font-semibold hover:text-amber-400 transition-colors">Gallery</a></li>
-                    <li><a href="#contact" class="nav-link relative text-white font-semibold hover:text-amber-400 transition-colors">Contact</a></li>
+                
+                <!-- Desktop Menu -->
+                <ul class="hidden md:flex gap-8 list-none">
+                    <li><a href="#home" class="nav-link text-white font-semibold hover:text-amber-400 transition-colors text-sm lg:text-base">Home</a></li>
+                    <li><a href="#magic" class="nav-link text-white font-semibold hover:text-amber-400 transition-colors text-sm lg:text-base">Orlando Magic</a></li>
+                    <li><a href="#seminoles" class="nav-link text-white font-semibold hover:text-amber-400 transition-colors text-sm lg:text-base">Seminoles</a></li>
+                    <li><a href="#gallery" class="nav-link text-white font-semibold hover:text-amber-400 transition-colors text-sm lg:text-base">Gallery</a></li>
+                    <li><a href="#news" class="nav-link text-white font-semibold hover:text-amber-400 transition-colors text-sm lg:text-base">News</a></li>
+                    <li><a href="#events" class="nav-link text-white font-semibold hover:text-amber-400 transition-colors text-sm lg:text-base">Events</a></li>
+                    <li><a href="#contact" class="nav-link text-white font-semibold hover:text-amber-400 transition-colors text-sm lg:text-base">Contact</a></li>
+                </ul>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-white text-2xl hover:text-amber-400 transition-colors">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-blue-600">
+                <ul class="flex flex-col gap-4 list-none">
+                    <li><a href="#home" class="text-white font-semibold hover:text-amber-400 transition-colors block">Home</a></li>
+                    <li><a href="#magic" class="text-white font-semibold hover:text-amber-400 transition-colors block">Orlando Magic</a></li>
+                    <li><a href="#seminoles" class="text-white font-semibold hover:text-amber-400 transition-colors block">Seminoles</a></li>
+                    <li><a href="#gallery" class="text-white font-semibold hover:text-amber-400 transition-colors block">Gallery</a></li>
+                    <li><a href="#news" class="text-white font-semibold hover:text-amber-400 transition-colors block">News</a></li>
+                    <li><a href="#events" class="text-white font-semibold hover:text-amber-400 transition-colors block">Events</a></li>
+                    <li><a href="#contact" class="text-white font-semibold hover:text-amber-400 transition-colors block">Contact</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="bg-gradient-to-r from-slate-900 via-blue-900 to-blue-700 text-white py-20 mb-8 rounded-b-3xl shadow-xl">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex items-center gap-12">
+    <section id="home" class="bg-gradient-to-r from-slate-900 via-blue-900 to-blue-700 text-white py-16 sm:py-20 mb-8 rounded-b-3xl shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
                 <div class="flex-1 animate-slide-left">
-                    <h1 class="text-5xl md:text-6xl font-black mb-6 drop-shadow-lg">Orlando Magic & Seminole High School</h1>
-                    <p class="text-2xl md:text-xl mb-8 opacity-95 font-light">Celebrating Excellence in Sports and Education</p>
-                    <button class="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-3 rounded-lg font-bold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-lg">
-                        Explore More
-                    </button>
+                    <h1 class="text-3xl sm:text-5xl md:text-6xl font-black mb-4 sm:mb-6 drop-shadow-lg leading-tight">
+                        Orlando Magic & Seminole High School
+                    </h1>
+                    <p class="text-lg sm:text-2xl mb-6 sm:mb-8 opacity-95 font-light">Celebrating Excellence in Sports and Education</p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-base sm:text-lg explore-btn">
+                            Explore More
+                        </button>
+                        <a href="#contact" class="bg-white bg-opacity-20 border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-bold hover:bg-opacity-30 transition-all duration-300 text-base sm:text-lg text-center">
+                            Get In Touch
+                        </a>
+                    </div>
                 </div>
-                <div class="flex-1 animate-slide-right hidden md:block">
+                <div class="flex-1 animate-slide-right w-full md:w-auto">
                     <img src="https://images.unsplash.com/photo-1546519227-7a46d19cd819?w=800&q=80" alt="Basketball Arena" class="w-full rounded-2xl shadow-2xl border-4 border-amber-400 hover:scale-105 transition-transform duration-300">
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Quick Stats Bar -->
+    <section class="py-8 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center">
+                    <div class="text-3xl font-black text-blue-700">35+</div>
+                    <p class="text-gray-600 font-semibold">Years Strong</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-black text-blue-700">1000+</div>
+                    <p class="text-gray-600 font-semibold">Fans & Students</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-black text-blue-700">50+</div>
+                    <p class="text-gray-600 font-semibold">Athletes</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-black text-blue-700">100%</div>
+                    <p class="text-gray-600 font-semibold">Dedication</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Orlando Magic Section -->
-    <section id="magic" class="py-20 bg-gradient-to-b from-blue-50 to-blue-100 rounded-3xl shadow-lg mx-4 md:mx-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="section-title relative text-center text-5xl font-black text-slate-900 mb-16 pb-4">Orlando Magic</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-100">
-                    <img src="https://images.unsplash.com/photo-1627873649417-af48de40cb2e?w=600&q=80" alt="Magic Logo" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300">
+    <section id="magic" class="py-16 sm:py-20 bg-gradient-to-b from-blue-50 to-blue-100 rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h2 class="section-title text-center text-4xl sm:text-5xl font-black text-slate-900 mb-16 pb-4">🏀 Orlando Magic</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-100 group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1627873649417-af48de40cb2e?w=600&q=80" alt="Magic Logo" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">About the Magic</h3>
-                        <p class="text-gray-700 text-lg leading-relaxed">The Orlando Magic is a professional basketball team based in Orlando, Florida. Playing in the Eastern Conference of the NBA, the Magic has a rich history of excellence and passionate fan support.</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">About the Magic</h3>
+                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">The Orlando Magic is a professional basketball team based in Orlando, Florida. Playing in the Eastern Conference of the NBA, the Magic has a rich history of excellence and passionate fan support.</p>
+                        <a href="#" class="inline-block mt-4 text-blue-700 font-bold hover:text-amber-400 transition-colors">Learn More →</a>
                     </div>
                 </div>
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-100">
-                    <img src="https://images.unsplash.com/photo-1518611505868-d2b91cd57c08?w=600&q=80" alt="Team Players" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-100 group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1518611505868-d2b91cd57c08?w=600&q=80" alt="Team Players" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Current Roster</h3>
-                        <p class="text-gray-700 text-lg leading-relaxed">The Magic features some of the most talented players in the NBA, competing at the highest level of professional basketball with determination and skill.</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Current Roster</h3>
+                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">The Magic features some of the most talented players in the NBA, competing at the highest level of professional basketball with determination and skill.</p>
+                        <a href="#" class="inline-block mt-4 text-blue-700 font-bold hover:text-amber-400 transition-colors">View Roster →</a>
                     </div>
                 </div>
-                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-100">
-                    <img src="https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&q=80" alt="Arena" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-100 group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&q=80" alt="Arena" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Amway Center</h3>
-                        <p class="text-gray-700 text-lg leading-relaxed">Home to the Orlando Magic, the Amway Center is a state-of-the-art arena that hosts thrilling games and world-class entertainment throughout the season.</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Amway Center</h3>
+                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">Home to the Orlando Magic, the Amway Center is a state-of-the-art arena that hosts thrilling games and world-class entertainment throughout the season.</p>
+                        <a href="#" class="inline-block mt-4 text-blue-700 font-bold hover:text-amber-400 transition-colors">Visit Venue →</a>
                     </div>
                 </div>
             </div>
@@ -137,29 +268,122 @@
     </section>
 
     <!-- Seminole High School Section -->
-    <section id="seminoles" class="py-20 bg-white rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="section-title relative text-center text-5xl font-black text-slate-900 mb-16 pb-4">Seminole High School</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-gradient-to-br from-blue-50 to-slate-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-200">
-                    <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80" alt="School Building" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300">
+    <section id="seminoles" class="py-16 sm:py-20 bg-white rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h2 class="section-title text-center text-4xl sm:text-5xl font-black text-slate-900 mb-16 pb-4">🏫 Seminole High School</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="bg-gradient-to-br from-blue-50 to-slate-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-200 group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=600&q=80" alt="School Building" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">School Spirit</h3>
-                        <p class="text-gray-700 text-lg leading-relaxed">Seminole High School is home to the Seminoles, a proud athletic program with a strong tradition of excellence, academic achievement, and community involvement.</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">School Spirit</h3>
+                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">Seminole High School is home to the Seminoles, a proud athletic program with a strong tradition of excellence, academic achievement, and community involvement.</p>
+                        <a href="#" class="inline-block mt-4 text-blue-700 font-bold hover:text-amber-400 transition-colors">Discover More →</a>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-blue-50 to-slate-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-200">
-                    <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="High School Athletes" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300">
+                <div class="bg-gradient-to-br from-blue-50 to-slate-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-200 group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="High School Athletes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Athletic Programs</h3>
-                        <p class="text-gray-700 text-lg leading-relaxed">From basketball to football, track to soccer, Seminole High School offers diverse athletic opportunities for students to develop their skills and compete at high levels.</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Athletic Programs</h3>
+                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">From basketball to football, track to soccer, Seminole High School offers diverse athletic opportunities for students to develop their skills and compete at high levels.</p>
+                        <a href="#" class="inline-block mt-4 text-blue-700 font-bold hover:text-amber-400 transition-colors">View Programs →</a>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-blue-50 to-slate-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-200">
-                    <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&q=80" alt="Team Celebration" class="w-full h-64 object-cover hover:scale-110 transition-transform duration-300">
+                <div class="bg-gradient-to-br from-blue-50 to-slate-100 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-4 transition-all duration-300 border border-blue-200 group">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&q=80" alt="Team Celebration" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                    </div>
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-4">Community</h3>
-                        <p class="text-gray-700 text-lg leading-relaxed">The Seminole community represents school pride, teamwork, and dedication. Students, athletes, and families come together to support their teams and celebrate achievements.</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Community</h3>
+                        <p class="text-gray-700 text-sm sm:text-base leading-relaxed">The Seminole community represents school pride, teamwork, and dedication. Students, athletes, and families come together to support their teams and celebrate achievements.</p>
+                        <a href="#" class="inline-block mt-4 text-blue-700 font-bold hover:text-amber-400 transition-colors">Join Us →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-16 sm:py-20 bg-gradient-to-b from-slate-50 to-blue-50 rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h2 class="section-title text-center text-4xl sm:text-5xl font-black text-slate-900 mb-16 pb-4">📰 Latest News</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <article class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-4">
+                        <span class="text-xs font-bold bg-amber-400 text-slate-900 px-3 py-1 rounded-full">BREAKING</span>
+                        <h3 class="text-xl font-bold mt-3">Magic Advances in Playoff Race</h3>
+                    </div>
+                    <p class="p-4 text-gray-700 text-sm">The Orlando Magic secured a crucial victory this weekend, moving closer to playoff contention. Key performances from star players highlight the team's strong momentum.</p>
+                    <div class="px-4 pb-4"><a href="#" class="text-blue-600 font-bold text-sm hover:text-amber-400 transition-colors">Read Full Story →</a></div>
+                </article>
+                <article class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-slate-600 to-slate-800 text-white p-4">
+                        <span class="text-xs font-bold bg-amber-400 text-slate-900 px-3 py-1 rounded-full">SPORTS</span>
+                        <h3 class="text-xl font-bold mt-3">Seminole Athletes Win Championship</h3>
+                    </div>
+                    <p class="p-4 text-gray-700 text-sm">Seminole High School athletes captured the district championship in multiple sports this season. Congratulations to all our talented competitors!</p>
+                    <div class="px-4 pb-4"><a href="#" class="text-blue-600 font-bold text-sm hover:text-amber-400 transition-colors">Read Full Story →</a></div>
+                </article>
+                <article class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-slate-700 text-white p-4">
+                        <span class="text-xs font-bold bg-amber-400 text-slate-900 px-3 py-1 rounded-full">COMMUNITY</span>
+                        <h3 class="text-xl font-bold mt-3">Community Appreciation Night</h3>
+                    </div>
+                    <p class="p-4 text-gray-700 text-sm">Join us for a special community appreciation event celebrating our athletes and supporters. Special discounts and activities available for all!</p>
+                    <div class="px-4 pb-4"><a href="#" class="text-blue-600 font-bold text-sm hover:text-amber-400 transition-colors">Learn More →</a></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-16 sm:py-20 bg-white rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h2 class="section-title text-center text-4xl sm:text-5xl font-black text-slate-900 mb-16 pb-4">📅 Upcoming Events</h2>
+            <div class="space-y-4">
+                <div class="bg-gradient-to-r from-blue-50 to-slate-50 border-l-4 border-blue-700 p-6 rounded-lg hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">🏀 Orlando Magic vs Miami Heat</h3>
+                            <p class="text-gray-600 font-semibold flex items-center gap-2">
+                                <i class="fas fa-calendar text-blue-700"></i> March 15, 2024 • 7:30 PM
+                            </p>
+                            <p class="text-gray-600 flex items-center gap-2 mt-1">
+                                <i class="fas fa-map-marker text-amber-400"></i> Amway Center, Orlando
+                            </p>
+                        </div>
+                        <a href="#" class="bg-blue-700 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-800 transition-colors whitespace-nowrap">Get Tickets</a>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-slate-50 to-blue-50 border-l-4 border-slate-700 p-6 rounded-lg hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">🏈 Seminole High School Football Game</h3>
+                            <p class="text-gray-600 font-semibold flex items-center gap-2">
+                                <i class="fas fa-calendar text-blue-700"></i> March 22, 2024 • 7:00 PM
+                            </p>
+                            <p class="text-gray-600 flex items-center gap-2 mt-1">
+                                <i class="fas fa-map-marker text-amber-400"></i> Seminole Stadium
+                            </p>
+                        </div>
+                        <a href="#" class="bg-slate-700 text-white px-6 py-2 rounded-lg font-bold hover:bg-slate-800 transition-colors whitespace-nowrap">Get Info</a>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-r from-blue-50 to-slate-50 border-l-4 border-amber-500 p-6 rounded-lg hover:shadow-lg transition-all duration-300">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 mb-2">🎉 Sports Awards Ceremony</h3>
+                            <p class="text-gray-600 font-semibold flex items-center gap-2">
+                                <i class="fas fa-calendar text-blue-700"></i> April 5, 2024 • 6:00 PM
+                            </p>
+                            <p class="text-gray-600 flex items-center gap-2 mt-1">
+                                <i class="fas fa-map-marker text-amber-400"></i> Seminole High School Auditorium
+                            </p>
+                        </div>
+                        <a href="#" class="bg-amber-500 text-slate-900 px-6 py-2 rounded-lg font-bold hover:bg-amber-600 transition-colors whitespace-nowrap">Register</a>
                     </div>
                 </div>
             </div>
@@ -167,32 +391,32 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-20 bg-gradient-to-b from-blue-50 to-blue-100 rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="section-title relative text-center text-5xl font-black text-slate-900 mb-16 pb-4">Gallery</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group">
-                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80" alt="Basketball Action" class="w-full h-72 object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
+    <section id="gallery" class="py-16 sm:py-20 bg-gradient-to-b from-blue-50 to-blue-100 rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h2 class="section-title text-center text-4xl sm:text-5xl font-black text-slate-900 mb-16 pb-4">📸 Gallery</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group h-72">
+                    <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&q=80" alt="Basketball Action" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
                     <h3 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white px-6 py-4 font-bold text-xl translate-y-16 group-hover:translate-y-0 transition-transform duration-300">Game Action</h3>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group">
-                    <img src="https://images.unsplash.com/photo-1575399132335-f5dee5014976?w=400&q=80" alt="Fans Cheering" class="w-full h-72 object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
+                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group h-72">
+                    <img src="https://images.unsplash.com/photo-1575399132335-f5dee5014976?w=400&q=80" alt="Fans Cheering" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
                     <h3 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white px-6 py-4 font-bold text-xl translate-y-16 group-hover:translate-y-0 transition-transform duration-300">Fan Support</h3>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group">
-                    <img src="https://images.unsplash.com/photo-1513323239048-85aa0900529b?w=400&q=80" alt="Trophy" class="w-full h-72 object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
+                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group h-72">
+                    <img src="https://images.unsplash.com/photo-1513323239048-85aa0900529b?w=400&q=80" alt="Trophy" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
                     <h3 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white px-6 py-4 font-bold text-xl translate-y-16 group-hover:translate-y-0 transition-transform duration-300">Championships</h3>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group">
-                    <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&q=80" alt="Team Huddle" class="w-full h-72 object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
+                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group h-72">
+                    <img src="https://images.unsplash.com/photo-1487180144351-b8472da7d491?w=400&q=80" alt="Team Huddle" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
                     <h3 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white px-6 py-4 font-bold text-xl translate-y-16 group-hover:translate-y-0 transition-transform duration-300">Team Spirit</h3>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group">
-                    <img src="https://images.unsplash.com/photo-1476480862245-38ade8e3e7ed?w=400&q=80" alt="Training" class="w-full h-72 object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
+                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group h-72">
+                    <img src="https://images.unsplash.com/photo-1476480862245-38ade8e3e7ed?w=400&q=80" alt="Training" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
                     <h3 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white px-6 py-4 font-bold text-xl translate-y-16 group-hover:translate-y-0 transition-transform duration-300">Practice & Training</h3>
                 </div>
-                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group">
-                    <img src="https://images.unsplash.com/photo-1516383740770-fbdba32f4a71?w=400&q=80" alt="Victory" class="w-full h-72 object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
+                <div class="relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl cursor-pointer group h-72">
+                    <img src="https://images.unsplash.com/photo-1516383740770-fbdba32f4a71?w=400&q=80" alt="Victory" class="w-full h-full object-cover group-hover:scale-125 group-hover:rotate-2 transition-transform duration-400">
                     <h3 class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent text-white px-6 py-4 font-bold text-xl translate-y-16 group-hover:translate-y-0 transition-transform duration-300">Victory</h3>
                 </div>
             </div>
@@ -200,39 +424,78 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-20 bg-gradient-to-r from-slate-900 via-blue-900 to-blue-700 text-white rounded-3xl shadow-xl mx-4 md:mx-8 my-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="section-title relative text-center text-5xl font-black text-white mb-16 pb-4">By the Numbers</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <section class="py-16 sm:py-20 bg-gradient-to-r from-slate-900 via-blue-900 to-blue-700 text-white rounded-3xl shadow-xl mx-4 md:mx-8 my-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <h2 class="section-title text-center text-4xl sm:text-5xl font-black text-white mb-16 pb-4">📊 By the Numbers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8">
                 <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-amber-400 border-opacity-30 hover:bg-opacity-20 hover:-translate-y-2 transition-all duration-300 text-center">
                     <h3 class="text-5xl font-black text-amber-400 mb-3">1989</h3>
-                    <p class="text-xl font-semibold opacity-95">Orlando Magic Founded</p>
+                    <p class="text-lg font-semibold opacity-95">Orlando Magic Founded</p>
                 </div>
                 <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-amber-400 border-opacity-30 hover:bg-opacity-20 hover:-translate-y-2 transition-all duration-300 text-center">
                     <h3 class="text-5xl font-black text-amber-400 mb-3">3</h3>
-                    <p class="text-xl font-semibold opacity-95">NBA Finals Appearances</p>
+                    <p class="text-lg font-semibold opacity-95">NBA Finals Appearances</p>
                 </div>
                 <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-amber-400 border-opacity-30 hover:bg-opacity-20 hover:-translate-y-2 transition-all duration-300 text-center">
                     <h3 class="text-5xl font-black text-amber-400 mb-3">100+</h3>
-                    <p class="text-xl font-semibold opacity-95">Years of Excellence</p>
+                    <p class="text-lg font-semibold opacity-95">Years of Excellence</p>
                 </div>
                 <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-2xl p-8 border border-amber-400 border-opacity-30 hover:bg-opacity-20 hover:-translate-y-2 transition-all duration-300 text-center">
                     <h3 class="text-5xl font-black text-amber-400 mb-3">1000+</h3>
-                    <p class="text-xl font-semibold opacity-95">Passionate Fans</p>
+                    <p class="text-lg font-semibold opacity-95">Passionate Fans</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Newsletter Section -->
+    <section class="py-16 sm:py-20 bg-gradient-to-r from-blue-600 to-slate-900 text-white rounded-3xl mx-4 md:mx-8 my-8">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-4xl sm:text-5xl font-black mb-4">Stay Updated</h2>
+            <p class="text-lg opacity-90 mb-8">Subscribe to our newsletter for the latest news, events, and updates from Orlando Magic and Seminole High School.</p>
+            <form class="flex flex-col sm:flex-row gap-3">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-lg text-slate-900 font-semibold focus:outline-none focus:ring-4 focus:ring-amber-400" required>
+                <button type="submit" class="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-3 rounded-lg font-bold hover:shadow-xl transition-all duration-300">
+                    Subscribe
+                </button>
+            </form>
+        </div>
+    </section>
+
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-b from-blue-50 to-slate-100 rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
-        <div class="max-w-2xl mx-auto px-6">
-            <h2 class="section-title relative text-center text-5xl font-black text-slate-900 mb-16 pb-4">Get In Touch</h2>
-            <form class="contact-form flex flex-col gap-6">
-                <input type="text" placeholder="Your Name" class="px-6 py-4 border-2 border-gray-300 rounded-xl font-semibold focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-200 bg-white transition-all duration-300" required>
-                <input type="email" placeholder="Your Email" class="px-6 py-4 border-2 border-gray-300 rounded-xl font-semibold focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-200 bg-white transition-all duration-300" required>
-                <textarea placeholder="Your Message" rows="6" class="px-6 py-4 border-2 border-gray-300 rounded-xl font-semibold focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-200 bg-white transition-all duration-300 resize-none" required></textarea>
-                <button type="submit" class="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-4 rounded-lg font-bold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-lg mt-4">
+    <section id="contact" class="py-16 sm:py-20 bg-gradient-to-b from-blue-50 to-slate-100 rounded-3xl shadow-lg mx-4 md:mx-8 my-8">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <h2 class="section-title text-center text-4xl sm:text-5xl font-black text-slate-900 mb-16 pb-4">Get In Touch</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center gap-2">
+                        <i class="fas fa-map-marker text-amber-400"></i> Visit Us
+                    </h3>
+                    <p class="text-gray-700 mb-2"><strong>Orlando Magic:</strong></p>
+                    <p class="text-gray-600 mb-4">Amway Center<br>Orlando, FL</p>
+                    <p class="text-gray-700 mb-2"><strong>Seminole High School:</strong></p>
+                    <p class="text-gray-600">Sanford, FL</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-blue-700 mb-4 flex items-center gap-2">
+                        <i class="fas fa-phone text-amber-400"></i> Contact Info
+                    </h3>
+                    <p class="text-gray-700 mb-2"><strong>Phone:</strong></p>
+                    <p class="text-gray-600 mb-4">(407) 123-4567</p>
+                    <p class="text-gray-700 mb-2"><strong>Email:</strong></p>
+                    <p class="text-gray-600">info@orlandonmagic-seminoles.com</p>
+                </div>
+            </div>
+
+            <form class="contact-form bg-white rounded-xl shadow-lg p-8 flex flex-col gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="Your Full Name" class="px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-200 bg-white transition-all duration-300" required>
+                    <input type="email" placeholder="Your Email" class="px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-200 bg-white transition-all duration-300" required>
+                </div>
+                <input type="text" placeholder="Subject" class="px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-200 bg-white transition-all duration-300" required>
+                <textarea placeholder="Your Message" rows="6" class="px-6 py-4 border-2 border-gray-300 rounded-lg font-semibold focus:outline-none focus:border-blue-700 focus:ring-4 focus:ring-blue-200 bg-white transition-all duration-300 resize-none" required></textarea>
+                <button type="submit" class="bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 px-8 py-4 rounded-lg font-bold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-lg">
                     Send Message
                 </button>
             </form>
@@ -241,17 +504,46 @@
 
     <!-- Footer -->
     <footer class="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white py-8 border-t-4 border-amber-400 mt-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-                <p class="font-semibold text-lg">&copy; 2024 Orlando Magic & Seminole High School. All rights reserved.</p>
-                <div class="flex gap-8">
-                    <a href="#" class="text-white font-bold hover:border-b-2 hover:border-amber-400 transition-all duration-300 pb-1">Twitter</a>
-                    <a href="#" class="text-white font-bold hover:border-b-2 hover:border-amber-400 transition-all duration-300 pb-1">Facebook</a>
-                    <a href="#" class="text-white font-bold hover:border-b-2 hover:border-amber-400 transition-all duration-300 pb-1">Instagram</a>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-amber-400">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-amber-400 transition-colors">Home</a></li>
+                        <li><a href="#magic" class="hover:text-amber-400 transition-colors">Orlando Magic</a></li>
+                        <li><a href="#seminoles" class="hover:text-amber-400 transition-colors">Seminoles</a></li>
+                        <li><a href="#contact" class="hover:text-amber-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-amber-400">Follow Us</h4>
+                    <div class="flex gap-4">
+                        <a href="#" class="hover:text-amber-400 transition-colors text-xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-amber-400 transition-colors text-xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-amber-400 transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-amber-400 transition-colors text-xl"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4 text-amber-400">Newsletter</h4>
+                    <p class="text-sm text-gray-400 mb-3">Get the latest updates delivered to your inbox.</p>
+                </div>
+            </div>
+            <div class="border-t border-blue-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="font-semibold text-center md:text-left">&copy; 2024 Orlando Magic & Seminole High School. All rights reserved.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="hover:text-amber-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-amber-400 transition-colors">Terms of Service</a>
+                    <a href="#" class="hover:text-amber-400 transition-colors">Sitemap</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top fixed bottom-8 right-8 bg-gradient-to-r from-amber-400 to-orange-400 text-slate-900 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 font-bold text-xl z-40">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
